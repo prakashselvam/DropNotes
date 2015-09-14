@@ -14,6 +14,9 @@
 		CD4ACF4D1BA6F5E000EB0289 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD4ACF4C1BA6F5E000EB0289 /* Images.xcassets */; };
 		CD4ACF501BA6F5E000EB0289 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4ACF4E1BA6F5E000EB0289 /* LaunchScreen.xib */; };
 		CD4ACF5C1BA6F5E000EB0289 /* DropNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF5B1BA6F5E000EB0289 /* DropNotesTests.m */; };
+		CD4ACF671BA7263B00EB0289 /* GALOCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF661BA7263B00EB0289 /* GALOCNavigationController.m */; };
+		CD4ACF6B1BA7292900EB0289 /* DropNotesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF6A1BA7292900EB0289 /* DropNotesTableViewController.m */; };
+		CD4ACF6E1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF6D1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,12 @@
 		CD4ACF551BA6F5E000EB0289 /* DropNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DropNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4ACF5A1BA6F5E000EB0289 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD4ACF5B1BA6F5E000EB0289 /* DropNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DropNotesTests.m; sourceTree = "<group>"; };
+		CD4ACF651BA7263B00EB0289 /* GALOCNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GALOCNavigationController.h; sourceTree = "<group>"; };
+		CD4ACF661BA7263B00EB0289 /* GALOCNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GALOCNavigationController.m; sourceTree = "<group>"; };
+		CD4ACF691BA7292900EB0289 /* DropNotesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropNotesTableViewController.h; sourceTree = "<group>"; };
+		CD4ACF6A1BA7292900EB0289 /* DropNotesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropNotesTableViewController.m; sourceTree = "<group>"; };
+		CD4ACF6C1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+UIColor_PXExtensions.h"; sourceTree = "<group>"; };
+		CD4ACF6D1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+UIColor_PXExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +90,8 @@
 		CD4ACF3E1BA6F5E000EB0289 /* DropNotes */ = {
 			isa = PBXGroup;
 			children = (
+				CD4ACF651BA7263B00EB0289 /* GALOCNavigationController.h */,
+				CD4ACF661BA7263B00EB0289 /* GALOCNavigationController.m */,
 				CD4ACF431BA6F5E000EB0289 /* AppDelegate.h */,
 				CD4ACF441BA6F5E000EB0289 /* AppDelegate.m */,
 				CD4ACF461BA6F5E000EB0289 /* ViewController.h */,
@@ -89,6 +100,10 @@
 				CD4ACF4C1BA6F5E000EB0289 /* Images.xcassets */,
 				CD4ACF4E1BA6F5E000EB0289 /* LaunchScreen.xib */,
 				CD4ACF3F1BA6F5E000EB0289 /* Supporting Files */,
+				CD4ACF691BA7292900EB0289 /* DropNotesTableViewController.h */,
+				CD4ACF6A1BA7292900EB0289 /* DropNotesTableViewController.m */,
+				CD4ACF6C1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.h */,
+				CD4ACF6D1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m */,
 			);
 			path = DropNotes;
 			sourceTree = "<group>";
@@ -219,7 +234,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD4ACF671BA7263B00EB0289 /* GALOCNavigationController.m in Sources */,
+				CD4ACF6B1BA7292900EB0289 /* DropNotesTableViewController.m in Sources */,
 				CD4ACF481BA6F5E000EB0289 /* ViewController.m in Sources */,
+				CD4ACF6E1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m in Sources */,
 				CD4ACF451BA6F5E000EB0289 /* AppDelegate.m in Sources */,
 				CD4ACF421BA6F5E000EB0289 /* main.m in Sources */,
 			);

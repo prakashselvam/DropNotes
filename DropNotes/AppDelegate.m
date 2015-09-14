@@ -7,16 +7,21 @@
 //
 
 #import "AppDelegate.h"
-
+#import "GALOCNavigationController.h"
+#import "DropNotesTableViewController.h"
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-
+@synthesize window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    DropNotesTableViewController *homeView = [[DropNotesTableViewController alloc]init];
+    GALOCNavigationController *navController = [[GALOCNavigationController alloc]initWithRootViewController:homeView];
+    window.rootViewController = navController;
+    [window makeKeyAndVisible];
     return YES;
 }
 
