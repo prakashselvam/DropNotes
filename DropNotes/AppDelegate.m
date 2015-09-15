@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#include "DropNotes-prefix.pch"
 #import "GALOCNavigationController.h"
 #import "DropNotesTableViewController.h"
 @interface AppDelegate ()

@@ -17,6 +17,7 @@
 		CD4ACF671BA7263B00EB0289 /* GALOCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF661BA7263B00EB0289 /* GALOCNavigationController.m */; };
 		CD4ACF6B1BA7292900EB0289 /* DropNotesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF6A1BA7292900EB0289 /* DropNotesTableViewController.m */; };
 		CD4ACF6E1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF6D1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m */; };
+		CD4ACF731BA84F0400EB0289 /* LocalNotesFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF721BA84F0400EB0289 /* LocalNotesFileReader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,9 @@
 		CD4ACF6A1BA7292900EB0289 /* DropNotesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropNotesTableViewController.m; sourceTree = "<group>"; };
 		CD4ACF6C1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+UIColor_PXExtensions.h"; sourceTree = "<group>"; };
 		CD4ACF6D1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+UIColor_PXExtensions.m"; sourceTree = "<group>"; };
+		CD4ACF6F1BA84DF700EB0289 /* DropNotes-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DropNotes-prefix.pch"; sourceTree = "<group>"; };
+		CD4ACF711BA84F0400EB0289 /* LocalNotesFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotesFileReader.h; sourceTree = "<group>"; };
+		CD4ACF721BA84F0400EB0289 /* LocalNotesFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalNotesFileReader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				CD4ACF6A1BA7292900EB0289 /* DropNotesTableViewController.m */,
 				CD4ACF6C1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.h */,
 				CD4ACF6D1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m */,
+				CD4ACF711BA84F0400EB0289 /* LocalNotesFileReader.h */,
+				CD4ACF721BA84F0400EB0289 /* LocalNotesFileReader.m */,
 			);
 			path = DropNotes;
 			sourceTree = "<group>";
@@ -113,6 +119,7 @@
 			children = (
 				CD4ACF401BA6F5E000EB0289 /* Info.plist */,
 				CD4ACF411BA6F5E000EB0289 /* main.m */,
+				CD4ACF6F1BA84DF700EB0289 /* DropNotes-prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -239,6 +246,7 @@
 				CD4ACF481BA6F5E000EB0289 /* ViewController.m in Sources */,
 				CD4ACF6E1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m in Sources */,
 				CD4ACF451BA6F5E000EB0289 /* AppDelegate.m in Sources */,
+				CD4ACF731BA84F0400EB0289 /* LocalNotesFileReader.m in Sources */,
 				CD4ACF421BA6F5E000EB0289 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,6 +444,7 @@
 				CD4ACF611BA6F5E000EB0289 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD4ACF621BA6F5E000EB0289 /* Build configuration list for PBXNativeTarget "DropNotesTests" */ = {
 			isa = XCConfigurationList;
@@ -444,6 +453,7 @@
 				CD4ACF641BA6F5E000EB0289 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

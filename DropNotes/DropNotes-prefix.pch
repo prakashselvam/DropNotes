@@ -1,0 +1,22 @@
+//
+//  DropNotes-prefix.pch
+//  DropNotes
+//
+//  Created by Prakash Selvam on 15/09/15.
+//  Copyright (c) 2015 Prakash Selvam. All rights reserved.
+//
+
+#ifndef DropNotes_DropNotes_prefix_pch
+#define DropNotes_DropNotes_prefix_pch
+
+
+
+#endif
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "UIColor+UIColor_PXExtensions.h"
+#endif
+
+
+#define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
