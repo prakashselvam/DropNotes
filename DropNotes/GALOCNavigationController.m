@@ -50,7 +50,7 @@
 
     }
     else{
-        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, 10, 320, 64)];
+        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, [UIScreen mainScreen].bounds.size.width, 64)];
         titleLabel.text = title;
         [titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [titleLabel setTextAlignment:NSTextAlignmentCenter];

@@ -18,6 +18,9 @@
 		CD4ACF6B1BA7292900EB0289 /* DropNotesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF6A1BA7292900EB0289 /* DropNotesTableViewController.m */; };
 		CD4ACF6E1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF6D1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m */; };
 		CD4ACF731BA84F0400EB0289 /* LocalNotesFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF721BA84F0400EB0289 /* LocalNotesFileReader.m */; };
+		CD4ACF771BA868CA00EB0289 /* NoteEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF751BA868CA00EB0289 /* NoteEditViewController.m */; };
+		CD4ACF781BA868CA00EB0289 /* NoteEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4ACF761BA868CA00EB0289 /* NoteEditViewController.xib */; };
+		CD4ACF7C1BA86BE700EB0289 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF7B1BA86BE700EB0289 /* DataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,11 @@
 		CD4ACF6F1BA84DF700EB0289 /* DropNotes-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DropNotes-prefix.pch"; sourceTree = "<group>"; };
 		CD4ACF711BA84F0400EB0289 /* LocalNotesFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotesFileReader.h; sourceTree = "<group>"; };
 		CD4ACF721BA84F0400EB0289 /* LocalNotesFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalNotesFileReader.m; sourceTree = "<group>"; };
+		CD4ACF741BA868CA00EB0289 /* NoteEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteEditViewController.h; sourceTree = "<group>"; };
+		CD4ACF751BA868CA00EB0289 /* NoteEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteEditViewController.m; sourceTree = "<group>"; };
+		CD4ACF761BA868CA00EB0289 /* NoteEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteEditViewController.xib; sourceTree = "<group>"; };
+		CD4ACF7A1BA86BE700EB0289 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		CD4ACF7B1BA86BE700EB0289 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +118,11 @@
 				CD4ACF6D1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m */,
 				CD4ACF711BA84F0400EB0289 /* LocalNotesFileReader.h */,
 				CD4ACF721BA84F0400EB0289 /* LocalNotesFileReader.m */,
+				CD4ACF741BA868CA00EB0289 /* NoteEditViewController.h */,
+				CD4ACF751BA868CA00EB0289 /* NoteEditViewController.m */,
+				CD4ACF761BA868CA00EB0289 /* NoteEditViewController.xib */,
+				CD4ACF7A1BA86BE700EB0289 /* DataManager.h */,
+				CD4ACF7B1BA86BE700EB0289 /* DataManager.m */,
 			);
 			path = DropNotes;
 			sourceTree = "<group>";
@@ -223,6 +236,7 @@
 			files = (
 				CD4ACF4B1BA6F5E000EB0289 /* Main.storyboard in Resources */,
 				CD4ACF501BA6F5E000EB0289 /* LaunchScreen.xib in Resources */,
+				CD4ACF781BA868CA00EB0289 /* NoteEditViewController.xib in Resources */,
 				CD4ACF4D1BA6F5E000EB0289 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,6 +261,8 @@
 				CD4ACF6E1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m in Sources */,
 				CD4ACF451BA6F5E000EB0289 /* AppDelegate.m in Sources */,
 				CD4ACF731BA84F0400EB0289 /* LocalNotesFileReader.m in Sources */,
+				CD4ACF771BA868CA00EB0289 /* NoteEditViewController.m in Sources */,
+				CD4ACF7C1BA86BE700EB0289 /* DataManager.m in Sources */,
 				CD4ACF421BA6F5E000EB0289 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

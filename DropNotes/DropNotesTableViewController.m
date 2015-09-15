@@ -8,13 +8,16 @@
 
 #import "DropNotesTableViewController.h"
 #import "GALOCNavigationController.h"
+#import "LocalNotesFileReader.h"
+#import "DataManager.h"
+#import "NoteEditViewController.h"
 
 @interface DropNotesTableViewController ()
-
+@property (weak) DataManager *dataManager;
 @end
 
 @implementation DropNotesTableViewController
-
+@synthesize dataManager;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -27,10 +30,31 @@
     //To initialize the nav bar
     GALOCNavigationController *navcontroller = (GALOCNavigationController *)self.parentViewController;
     [navcontroller setHeaderForViewController:@"Drop Notes"];
-    [navcontroller setRightButtonWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:nil title:@"Add"];
-    [navcontroller setLeftButtonWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil title:@"Refresh"];
+    [navcontroller setRightButtonWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(addnew) title:@"Add"];
+    [navcontroller setLeftButtonWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh) title:@"Refresh"];
+    
+    //To initialize Notes Reader
+    dataManager = [DataManager sharedDataManager];
+    dataManager.localNotesFileReader = [[LocalNotesFileReader alloc] init];
 }
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self refresh];
+}
+- (void)refresh {
+    [dataManager.localNotesFileReader ReadFilesList];
+    dataManager.Notes = [dataManager.localNotesFileReader ReadNotes];
+    [self.tableView reloadData];
+}
+- (void)addnew{
+    dataManager.selected = -1;
+    [self pushToNewNotes];
+}
+- (void)pushToNewNotes {
+    NoteEditViewController *viewController = [[NoteEditViewController alloc]initWithNibName:@"NoteEditViewController" bundle:nil];
+    GALOCNavigationController *navcontroller = (GALOCNavigationController *)self.parentViewController;
+    [navcontroller pushViewController:viewController animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -40,23 +64,45 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 0;
+    return [dataManager.Notes count];
+    //return 1;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
-    
+    UITableViewCell *cell = nil;
+    @try {
+    cell = [tableView dequeueReusableCellWithIdentifier:@"Cel" forIndexPath:indexPath];
+    }
+    @catch (NSException *exception) {
+    }
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cel"];
+    }
+    NSUInteger row = [dataManager.Notes count]-indexPath.row-1;
+    cell.textLabel.text = [self getTitleOrContent:row flag:TRUE];
+    cell.detailTextLabel.text = [self getTitleOrContent:row flag:FALSE];
     return cell;
 }
-*/
+- (NSString *)getTitleOrContent: (NSUInteger)index flag:(Boolean)flag{
+    NSArray *keys = dataManager.localNotesFileReader.FilesList;
+    NSString *Title = @"";
+    Title = [dataManager.Notes objectForKey:[keys objectAtIndex:index]];
+    NSUInteger length;
+    if (flag) length = 20;
+    else length = 100;
+    if ([Title length]<length) {
+        length = [Title length];
+    }
+    Title = [Title substringToIndex:length];
+    return Title;
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -65,18 +111,28 @@
     return YES;
 }
 */
+//Called if a row is selected
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSUInteger row = [dataManager.Notes count]-indexPath.row-1;
+    dataManager.selected = row;
+    [self pushToNewNotes];
+}
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSUInteger row = [dataManager.Notes count]-indexPath.row-1;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        NSArray *keys = dataManager.localNotesFileReader.FilesList;
+        NSString *key = [keys objectAtIndex:row];
+        [dataManager.Notes removeObjectForKey:key];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [dataManager.localNotesFileReader deleteFileWithFileName:key];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

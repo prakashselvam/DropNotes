@@ -10,10 +10,12 @@
 
 @interface LocalNotesFileReader : NSObject
 
-@property NSMutableDictionary *FilesList;
-
+@property NSMutableArray *FilesList;
+-(id) init;
 - (void) ReadFilesList;
 - (NSMutableDictionary *) ReadNotes;
 - (NSString *) ReadNoteWithFileName:(NSString *)fileName;
 - (Boolean) WriteNoteWithFileName:(NSString *)fileName andContent:(NSString *)Content;
+- (NSString *)getNextFileNameAndWriteWithContent:(NSString *)Content;
+- (void)deleteFileWithFileName:(NSString *)FileName;
 @end
