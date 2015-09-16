@@ -52,6 +52,7 @@
         if ([[DBSession sharedSession] isLinked]) {
             //create the file sync object to use in future
             [DataManager sharedDataManager].dropBoxFileSyncObj = [[DropBoxFileSync alloc]init];
+            [[DataManager sharedDataManager].localNotesFileReader syncAllFilesToDropbox];
         }
         return YES;
     }

@@ -17,10 +17,11 @@
 @interface DropNotesTableViewController () <UITableViewDataSource,UITableViewDelegate, UIAlertViewDelegate>
 @property (weak) DataManager *dataManager;
 @property UITableView *notesTableView;
+@property UILabel *buttonDropBoxLabel;
 @end
 
 @implementation DropNotesTableViewController
-@synthesize dataManager,notesTableView;
+@synthesize dataManager,notesTableView,buttonDropBoxLabel;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -43,7 +44,7 @@
     [self.view addSubview:notesTableView];
     [notesTableView setDataSource:self];
     [notesTableView setDelegate:self];
-    [[DBSession sharedSession] linkFromController:self];
+    //[[DBSession sharedSession] linkFromController:self];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -62,11 +63,12 @@
     UIImageView *dropboxIconView = [[UIImageView alloc]initWithImage:dropboxIcon];
     [dropboxIconView setFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width-200)/2, 2, 36, 36)];
     [dropBoxButton addSubview:dropboxIconView];
-    UILabel *buttonDropBoxLabel = [[UILabel alloc]initWithFrame:
+    buttonDropBoxLabel = [[UILabel alloc]initWithFrame:
                                    CGRectMake(20, 0, [UIScreen mainScreen].bounds.size.width, 40)];
     [buttonDropBoxLabel setTextColor:[UIColor whiteColor]];
     [buttonDropBoxLabel setTextAlignment:NSTextAlignmentCenter];
-    buttonDropBoxLabel.text = @"Sync with DropBox";
+    if (![[DBSession sharedSession] isLinked]) buttonDropBoxLabel.text = @"Login to DropBox";
+    else buttonDropBoxLabel.text = @"Sign out of DropBox";
     [dropBoxButton addSubview:buttonDropBoxLabel];
     [dropBoxButton setUserInteractionEnabled:TRUE];
     //Setup onclick for button dropbox
@@ -77,7 +79,6 @@
     [self.view addSubview:dropBoxButton];
 }
 - (void)syncWithDropBox {
-    BOOL a = [[DBSession sharedSession] isLinked];
     if (![[DBSession sharedSession] isLinked]) {
         [[DBSession sharedSession] linkFromController:self];
     }
@@ -87,6 +88,8 @@
            delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil]
          show];
     }
+    if (![[DBSession sharedSession] isLinked]) buttonDropBoxLabel.text = @"Login to DropBox";
+    else buttonDropBoxLabel.text = @"Sign out of DropBox";
 }
 - (void)refresh {
     [dataManager.localNotesFileReader ReadFilesList];
@@ -123,7 +126,6 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     UITableViewCell *cell = nil;
     @try {
     cell = [tableView dequeueReusableCellWithIdentifier:@"Cel" forIndexPath:indexPath];
@@ -139,17 +141,26 @@
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return cell;
 }
-- (NSString *)getTitleOrContent: (NSUInteger)index flag:(Boolean)flag{
+- (NSString *)getTitleOrContent: (NSUInteger)index flag:(Boolean)flagtitle{
     NSArray *keys = dataManager.localNotesFileReader.FilesList;
     NSString *Title = @"";
-    Title = [dataManager.Notes objectForKey:[keys objectAtIndex:index]];
+    NSString *fileName = [keys objectAtIndex:index];
+    Title = [dataManager.Notes objectForKey:fileName];
     NSUInteger length;
-    if (flag) length = 20;
+    if (flagtitle) length = 17;
     else length = 100;
     if ([Title length]<length) {
         length = [Title length];
     }
     Title = [Title substringToIndex:length];
+    if (flagtitle) {
+        NSString *emptyString = @"                                  ";
+        NSString *dateStamp = [NSString stringWithFormat:@"...%@-%@/%@/%@",[emptyString substringToIndex:22-[Title length]],
+                               [fileName substringWithRange:NSMakeRange(6, 2)],
+                               [fileName substringWithRange:NSMakeRange(4, 2)],
+                               [fileName substringWithRange:NSMakeRange(0, 4)]];
+        Title = [Title stringByAppendingString:dateStamp];
+    }
     return Title;
 }
 
@@ -217,5 +228,7 @@
         [alertView dismissWithClickedButtonIndex:index animated:YES];
         [[DBSession sharedSession] unlinkAll];
     }
+    if (![[DBSession sharedSession] isLinked]) buttonDropBoxLabel.text = @"Login to DropBox";
+    else buttonDropBoxLabel.text = @"Sign out of DropBox";
 }
 @end
