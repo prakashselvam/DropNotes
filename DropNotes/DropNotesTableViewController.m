@@ -48,7 +48,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self refresh];
+    [self refreshLocal];
 }
 -(void)viewDidAppear:(BOOL)animated {
     //add button for drop box sync
@@ -91,11 +91,18 @@
     if (![[DBSession sharedSession] isLinked]) buttonDropBoxLabel.text = @"Login to DropBox";
     else buttonDropBoxLabel.text = @"Sign out of DropBox";
 }
-- (void)refresh {
+-(void)refreshLocal {
     [dataManager.localNotesFileReader ReadFilesList];
     dataManager.Notes = [dataManager.localNotesFileReader ReadNotes];
-    [dataManager.localNotesFileReader syncAllFilesToDropbox];
     [self.notesTableView reloadData];
+}
+- (void)refresh {
+    [self refreshLocal];
+    if (dataManager.dropBoxFileSyncObj) {
+    [dataManager.localNotesFileReader syncAllFilesToDropbox];
+    }else {
+        [[DBSession sharedSession] linkFromController:self];
+    }
 }
 - (void)addnew{
     dataManager.selected = -1;
@@ -227,6 +234,7 @@
     else if(index != alertView.cancelButtonIndex){
         [alertView dismissWithClickedButtonIndex:index animated:YES];
         [[DBSession sharedSession] unlinkAll];
+        dataManager.dropBoxFileSyncObj = nil;
     }
     if (![[DBSession sharedSession] isLinked]) buttonDropBoxLabel.text = @"Login to DropBox";
     else buttonDropBoxLabel.text = @"Sign out of DropBox";
