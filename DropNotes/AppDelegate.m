@@ -11,16 +11,17 @@
 #import "GALOCNavigationController.h"
 #import "DropNotesTableViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
+#import "DataManager.h"
 @interface AppDelegate () <DBSessionDelegate, DBNetworkRequestDelegate>
-
+@property DropNotesTableViewController *homeView;
 @end
 
 @implementation AppDelegate
-@synthesize window;
+@synthesize window,homeView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    DropNotesTableViewController *homeView = [[DropNotesTableViewController alloc]init];
+    homeView = [[DropNotesTableViewController alloc]init];
     GALOCNavigationController *navController = [[GALOCNavigationController alloc]initWithRootViewController:homeView];
     window.rootViewController = navController;
     [window makeKeyAndVisible];
@@ -45,6 +46,17 @@
     }
 
     return YES;
+}
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    if ([[DBSession sharedSession] handleOpenURL:url]) {
+        if ([[DBSession sharedSession] isLinked]) {
+            //create the file sync object to use in future
+            [DataManager sharedDataManager].dropBoxFileSyncObj = [[DropBoxFileSync alloc]init];
+        }
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -78,6 +90,16 @@
        cancelButtonTitle:@"Cancel" otherButtonTitles:@"Relink", nil]
      show];
 }
+#pragma mark -
+#pragma mark UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index {
+    if (index != alertView.cancelButtonIndex) {
+        [[DBSession sharedSession] linkFromController:homeView];
+    }
+    relinkUserId = nil;
+}
+
 #pragma mark -
 #pragma mark DBNetworkRequestDelegate methods
 

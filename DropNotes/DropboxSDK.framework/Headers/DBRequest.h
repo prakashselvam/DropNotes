@@ -6,7 +6,7 @@
 //  Copyright 2010 Dropbox, Inc. All rights reserved.
 //
 
-
+#import <CoreGraphics/CoreGraphics.h>
 @protocol DBNetworkRequestDelegate;
 
 /* DBRestRequest will download a URL either into a file that you provied the name to or it will

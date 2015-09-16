@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "LocalNotesFileReader.h"
+#import "DropBoxFileSync.h"
 
 @interface DataManager : NSObject
 
 @property LocalNotesFileReader *localNotesFileReader;
 @property NSMutableDictionary *Notes;
 @property NSInteger selected;
+@property DropBoxFileSync *dropBoxFileSyncObj;
 
 + (DataManager*)sharedDataManager;
 

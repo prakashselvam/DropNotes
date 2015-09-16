@@ -8,6 +8,7 @@
 
 
 #import "DBSession.h"
+#import <CoreGraphics/CoreGraphics.h>
 
 @protocol DBRestClientDelegate;
 @class DBAccountInfo;

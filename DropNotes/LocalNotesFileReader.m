@@ -8,6 +8,8 @@
 
 #import "LocalNotesFileReader.h"
 #import "DropNotes-prefix.pch"
+#import "DropBoxFileSync.h"
+#import "DataManager.h"
 
 @implementation LocalNotesFileReader
 @synthesize FilesList;
@@ -48,6 +50,21 @@
     @finally {
         NSLog(@"Exception");
     }
+}
+- (void)syncAllFilesToDropbox {
+    @try {
+        for (NSString *FileName in FilesList) {
+            NSString *FilePath = [DOCUMENTS_FOLDER stringByAppendingPathComponent:FileName];
+            [[DataManager sharedDataManager].dropBoxFileSyncObj WriteFilesToDropBoxWithName:FileName fromlocalPath:FilePath];
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Exception: %@", exception);
+    }
+    @finally {
+        NSLog(@"Exception");
+    }
+
 }
 //Reads all the notes from local Directory
 - (NSMutableDictionary *) ReadNotes {
@@ -97,6 +114,7 @@
             NSString *FilePath = [DOCUMENTS_FOLDER stringByAppendingPathComponent:fileName];
             [Content writeToFile:FilePath atomically:YES encoding:NSUTF8StringEncoding error:&writeError];
             if (!writeError) {
+                [[DataManager sharedDataManager].dropBoxFileSyncObj WriteFilesToDropBoxWithName:fileName fromlocalPath:FilePath];
                 return TRUE;
             }
         }
@@ -114,6 +132,7 @@
     NSString *FilesListFilePath = [DOCUMENTS_FOLDER stringByAppendingPathComponent:FileName];
     [[NSFileManager defaultManager] removeItemAtPath:FilesListFilePath error:nil];
     [FilesList removeObject:FileName];
+    [[DataManager sharedDataManager].dropBoxFileSyncObj deleteFileWithName:FileName];
     [self WriteFileList:FilesList];
 }
 //Get a name to give for new notes added by the user

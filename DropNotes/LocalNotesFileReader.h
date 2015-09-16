@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DropBoxFileSync.h"
 
 @interface LocalNotesFileReader : NSObject
 
 @property NSMutableArray *FilesList;
+
 -(id) init;
 - (void) ReadFilesList;
 - (NSMutableDictionary *) ReadNotes;
@@ -18,4 +20,5 @@
 - (Boolean) WriteNoteWithFileName:(NSString *)fileName andContent:(NSString *)Content;
 - (NSString *)getNextFileNameAndWriteWithContent:(NSString *)Content;
 - (void)deleteFileWithFileName:(NSString *)FileName;
+- (void)syncAllFilesToDropbox;
 @end

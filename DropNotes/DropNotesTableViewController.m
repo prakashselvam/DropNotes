@@ -14,7 +14,7 @@
 #import "NoteEditViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 
-@interface DropNotesTableViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface DropNotesTableViewController () <UITableViewDataSource,UITableViewDelegate, UIAlertViewDelegate>
 @property (weak) DataManager *dataManager;
 @property UITableView *notesTableView;
 @end
@@ -34,7 +34,7 @@
     GALOCNavigationController *navcontroller = (GALOCNavigationController *)self.parentViewController;
     [navcontroller setHeaderForViewController:@"Drop Notes"];
     [navcontroller setRightButtonWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(addnew) title:@"Add"];
-    [navcontroller setLeftButtonWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh) title:@"Refresh"];
+    [navcontroller setLeftButtonWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh) title:@"Sync"];
     //To initialize Notes Reader
     dataManager = [DataManager sharedDataManager];
     dataManager.localNotesFileReader = [[LocalNotesFileReader alloc] init];
@@ -43,6 +43,7 @@
     [self.view addSubview:notesTableView];
     [notesTableView setDataSource:self];
     [notesTableView setDelegate:self];
+    [[DBSession sharedSession] linkFromController:self];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -76,20 +77,21 @@
     [self.view addSubview:dropBoxButton];
 }
 - (void)syncWithDropBox {
+    BOOL a = [[DBSession sharedSession] isLinked];
     if (![[DBSession sharedSession] isLinked]) {
         [[DBSession sharedSession] linkFromController:self];
     }
-//    else {
-//        [[DBSession sharedSession] unlinkAll];
-//        [[[UIAlertView alloc]
-//           initWithTitle:@"Account Unlinked!" message:@"Your dropbox account has been unlinked"
-//           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
-//         show];
-//    }
+    else {
+        [[[UIAlertView alloc]
+           initWithTitle:@"Already Loged in!" message:@"Do you want to Log Out?"
+           delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil]
+         show];
+    }
 }
 - (void)refresh {
     [dataManager.localNotesFileReader ReadFilesList];
     dataManager.Notes = [dataManager.localNotesFileReader ReadNotes];
+    [dataManager.localNotesFileReader syncAllFilesToDropbox];
     [self.notesTableView reloadData];
 }
 - (void)addnew{
@@ -204,5 +206,16 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark -
+#pragma mark UIAlertViewDelegate methods
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index {
+    if (index == alertView.cancelButtonIndex) {
+        [alertView dismissWithClickedButtonIndex:index animated:YES];
+    }
+    else if(index != alertView.cancelButtonIndex){
+        [alertView dismissWithClickedButtonIndex:index animated:YES];
+        [[DBSession sharedSession] unlinkAll];
+    }
+}
 @end
