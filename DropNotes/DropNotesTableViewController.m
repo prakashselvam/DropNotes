@@ -10,14 +10,16 @@
 #import "GALOCNavigationController.h"
 #import "LocalNotesFileReader.h"
 #import "DataManager.h"
+#import "DropNotes-prefix.pch"
 #import "NoteEditViewController.h"
 
-@interface DropNotesTableViewController ()
+@interface DropNotesTableViewController () <UITableViewDataSource,UITableViewDelegate>
 @property (weak) DataManager *dataManager;
+@property UITableView *notesTableView;
 @end
 
 @implementation DropNotesTableViewController
-@synthesize dataManager;
+@synthesize dataManager,notesTableView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -32,19 +34,53 @@
     [navcontroller setHeaderForViewController:@"Drop Notes"];
     [navcontroller setRightButtonWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(addnew) title:@"Add"];
     [navcontroller setLeftButtonWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh) title:@"Refresh"];
-    
     //To initialize Notes Reader
     dataManager = [DataManager sharedDataManager];
     dataManager.localNotesFileReader = [[LocalNotesFileReader alloc] init];
+    //Initialize table view
+    notesTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-40)];
+    [self.view addSubview:notesTableView];
+    [notesTableView setDataSource:self];
+    [notesTableView setDelegate:self];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self refresh];
 }
+-(void)viewDidAppear:(BOOL)animated {
+    //add button for drop box sync
+    UIView *dropBoxButton = [[UIView alloc]initWithFrame:
+                             CGRectMake(0, [UIScreen mainScreen].bounds.size.height-40,
+                                        [UIScreen mainScreen].bounds.size.width, 40)];
+    [dropBoxButton setBackgroundColor:[UIColor pxColorWithHexValue:@"#2196F3"]];
+//    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1)];
+//    [line setBackgroundColor:[UIColor pxColorWithHexValue:@"#2196F3"]];
+//    [dropBoxButton addSubview:line];
+    UIImage *dropboxIcon = [UIImage imageNamed:@"dropbox.png"];
+    UIImageView *dropboxIconView = [[UIImageView alloc]initWithImage:dropboxIcon];
+    [dropboxIconView setFrame:CGRectMake(70, 2, 36, 36)];
+    [dropBoxButton addSubview:dropboxIconView];
+    UILabel *buttonDropBoxLabel = [[UILabel alloc]initWithFrame:
+                                   CGRectMake(20, 0, [UIScreen mainScreen].bounds.size.width, 40)];
+    [buttonDropBoxLabel setTextColor:[UIColor whiteColor]];
+    [buttonDropBoxLabel setTextAlignment:NSTextAlignmentCenter];
+    buttonDropBoxLabel.text = @"Sync with DropBox";
+    [dropBoxButton addSubview:buttonDropBoxLabel];
+    [dropBoxButton setUserInteractionEnabled:TRUE];
+    //Setup onclick for button dropbox
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(syncWithDropBox)];
+    [dropBoxButton addGestureRecognizer:singleFingerTap];
+    [self.view addSubview:dropBoxButton];
+}
+- (void)syncWithDropBox {
+    
+}
 - (void)refresh {
     [dataManager.localNotesFileReader ReadFilesList];
     dataManager.Notes = [dataManager.localNotesFileReader ReadNotes];
-    [self.tableView reloadData];
+    [self.notesTableView reloadData];
 }
 - (void)addnew{
     dataManager.selected = -1;
@@ -88,6 +124,7 @@
     NSUInteger row = [dataManager.Notes count]-indexPath.row-1;
     cell.textLabel.text = [self getTitleOrContent:row flag:TRUE];
     cell.detailTextLabel.text = [self getTitleOrContent:row flag:FALSE];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return cell;
 }
 - (NSString *)getTitleOrContent: (NSUInteger)index flag:(Boolean)flag{

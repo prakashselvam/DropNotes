@@ -21,6 +21,7 @@
 		CD4ACF771BA868CA00EB0289 /* NoteEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF751BA868CA00EB0289 /* NoteEditViewController.m */; };
 		CD4ACF781BA868CA00EB0289 /* NoteEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4ACF761BA868CA00EB0289 /* NoteEditViewController.xib */; };
 		CD4ACF7C1BA86BE700EB0289 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF7B1BA86BE700EB0289 /* DataManager.m */; };
+		CD4ACF821BA9828C00EB0289 /* dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = CD4ACF811BA9828C00EB0289 /* dropbox.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		CD4ACF761BA868CA00EB0289 /* NoteEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteEditViewController.xib; sourceTree = "<group>"; };
 		CD4ACF7A1BA86BE700EB0289 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		CD4ACF7B1BA86BE700EB0289 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		CD4ACF811BA9828C00EB0289 /* dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropbox.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,27 +104,15 @@
 		CD4ACF3E1BA6F5E000EB0289 /* DropNotes */ = {
 			isa = PBXGroup;
 			children = (
-				CD4ACF651BA7263B00EB0289 /* GALOCNavigationController.h */,
-				CD4ACF661BA7263B00EB0289 /* GALOCNavigationController.m */,
 				CD4ACF431BA6F5E000EB0289 /* AppDelegate.h */,
 				CD4ACF441BA6F5E000EB0289 /* AppDelegate.m */,
-				CD4ACF461BA6F5E000EB0289 /* ViewController.h */,
-				CD4ACF471BA6F5E000EB0289 /* ViewController.m */,
-				CD4ACF491BA6F5E000EB0289 /* Main.storyboard */,
+				CD4ACF851BA985F300EB0289 /* ViewControllers */,
+				CD4ACF841BA985D000EB0289 /* CoreClasses */,
+				CD4ACF831BA985B200EB0289 /* Category */,
+				CD4ACF801BA9803C00EB0289 /* View */,
+				CD4ACF7F1BA9802D00EB0289 /* Resources */,
 				CD4ACF4C1BA6F5E000EB0289 /* Images.xcassets */,
-				CD4ACF4E1BA6F5E000EB0289 /* LaunchScreen.xib */,
 				CD4ACF3F1BA6F5E000EB0289 /* Supporting Files */,
-				CD4ACF691BA7292900EB0289 /* DropNotesTableViewController.h */,
-				CD4ACF6A1BA7292900EB0289 /* DropNotesTableViewController.m */,
-				CD4ACF6C1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.h */,
-				CD4ACF6D1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m */,
-				CD4ACF711BA84F0400EB0289 /* LocalNotesFileReader.h */,
-				CD4ACF721BA84F0400EB0289 /* LocalNotesFileReader.m */,
-				CD4ACF741BA868CA00EB0289 /* NoteEditViewController.h */,
-				CD4ACF751BA868CA00EB0289 /* NoteEditViewController.m */,
-				CD4ACF761BA868CA00EB0289 /* NoteEditViewController.xib */,
-				CD4ACF7A1BA86BE700EB0289 /* DataManager.h */,
-				CD4ACF7B1BA86BE700EB0289 /* DataManager.m */,
 			);
 			path = DropNotes;
 			sourceTree = "<group>";
@@ -152,6 +142,59 @@
 				CD4ACF5A1BA6F5E000EB0289 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD4ACF7F1BA9802D00EB0289 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CD4ACF811BA9828C00EB0289 /* dropbox.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		CD4ACF801BA9803C00EB0289 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CD4ACF761BA868CA00EB0289 /* NoteEditViewController.xib */,
+				CD4ACF491BA6F5E000EB0289 /* Main.storyboard */,
+				CD4ACF4E1BA6F5E000EB0289 /* LaunchScreen.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		CD4ACF831BA985B200EB0289 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				CD4ACF6C1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.h */,
+				CD4ACF6D1BA72FDF00EB0289 /* UIColor+UIColor_PXExtensions.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
+		CD4ACF841BA985D000EB0289 /* CoreClasses */ = {
+			isa = PBXGroup;
+			children = (
+				CD4ACF711BA84F0400EB0289 /* LocalNotesFileReader.h */,
+				CD4ACF721BA84F0400EB0289 /* LocalNotesFileReader.m */,
+				CD4ACF7A1BA86BE700EB0289 /* DataManager.h */,
+				CD4ACF7B1BA86BE700EB0289 /* DataManager.m */,
+			);
+			name = CoreClasses;
+			sourceTree = "<group>";
+		};
+		CD4ACF851BA985F300EB0289 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CD4ACF651BA7263B00EB0289 /* GALOCNavigationController.h */,
+				CD4ACF661BA7263B00EB0289 /* GALOCNavigationController.m */,
+				CD4ACF461BA6F5E000EB0289 /* ViewController.h */,
+				CD4ACF471BA6F5E000EB0289 /* ViewController.m */,
+				CD4ACF691BA7292900EB0289 /* DropNotesTableViewController.h */,
+				CD4ACF6A1BA7292900EB0289 /* DropNotesTableViewController.m */,
+				CD4ACF741BA868CA00EB0289 /* NoteEditViewController.h */,
+				CD4ACF751BA868CA00EB0289 /* NoteEditViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD4ACF821BA9828C00EB0289 /* dropbox.png in Resources */,
 				CD4ACF4B1BA6F5E000EB0289 /* Main.storyboard in Resources */,
 				CD4ACF501BA6F5E000EB0289 /* LaunchScreen.xib in Resources */,
 				CD4ACF781BA868CA00EB0289 /* NoteEditViewController.xib in Resources */,

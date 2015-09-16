@@ -28,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationBar.barTintColor = [UIColor pxColorWithHexValue:@"2196F3"];
+//    self.navigationBar.translucent = NO;
     // Do any additional setup after loading the view.
 }
 
@@ -54,7 +56,7 @@
         titleLabel.text = title;
         [titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [titleLabel setTextAlignment:NSTextAlignmentCenter];
-        [titleLabel setTextColor:[UIColor pxColorWithHexValue:@"#727272"]];
+        [titleLabel setTextColor:[UIColor pxColorWithHexValue:@"#FFFFFF"]];
         [self.view addSubview:titleLabel];
     }
 }
@@ -67,7 +69,7 @@
     }
     UIBarButtonItem *bbItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:nil];
     UILabel *temp = [[UILabel alloc] init];
-    [bbItem setTintColor: [UIColor pxColorWithHexValue:@"#2196F3"]];
+    [bbItem setTintColor: [UIColor pxColorWithHexValue:@"#ffffff"]];
     [bbItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:temp.font,NSFontAttributeName, nil] forState:UIControlStateNormal];
     [[self.topViewController navigationItem] setRightBarButtonItem:bbItem];
 }
@@ -78,7 +80,7 @@
     }
     UIBarButtonItem *bbItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:nil];
     UILabel *temp = [[UILabel alloc] init];
-    [bbItem setTintColor: [UIColor pxColorWithHexValue:@"#2196f3"]];
+    [bbItem setTintColor: [UIColor pxColorWithHexValue:@"#ffffff"]];
     [bbItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:temp.font,NSFontAttributeName, nil] forState:UIControlStateNormal];
     [[self.topViewController navigationItem] setLeftBarButtonItem:bbItem];
 }

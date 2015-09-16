@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DropNotesTableViewController : UITableViewController
+@interface DropNotesTableViewController : UIViewController
 
 @end
