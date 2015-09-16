@@ -12,6 +12,7 @@
 #import "DataManager.h"
 #import "DropNotes-prefix.pch"
 #import "NoteEditViewController.h"
+#import <DropboxSDK/DropboxSDK.h>
 
 @interface DropNotesTableViewController () <UITableViewDataSource,UITableViewDelegate>
 @property (weak) DataManager *dataManager;
@@ -58,7 +59,7 @@
 //    [dropBoxButton addSubview:line];
     UIImage *dropboxIcon = [UIImage imageNamed:@"dropbox.png"];
     UIImageView *dropboxIconView = [[UIImageView alloc]initWithImage:dropboxIcon];
-    [dropboxIconView setFrame:CGRectMake(70, 2, 36, 36)];
+    [dropboxIconView setFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width-200)/2, 2, 36, 36)];
     [dropBoxButton addSubview:dropboxIconView];
     UILabel *buttonDropBoxLabel = [[UILabel alloc]initWithFrame:
                                    CGRectMake(20, 0, [UIScreen mainScreen].bounds.size.width, 40)];
@@ -75,7 +76,16 @@
     [self.view addSubview:dropBoxButton];
 }
 - (void)syncWithDropBox {
-    
+    if (![[DBSession sharedSession] isLinked]) {
+        [[DBSession sharedSession] linkFromController:self];
+    }
+//    else {
+//        [[DBSession sharedSession] unlinkAll];
+//        [[[UIAlertView alloc]
+//           initWithTitle:@"Account Unlinked!" message:@"Your dropbox account has been unlinked"
+//           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]
+//         show];
+//    }
 }
 - (void)refresh {
     [dataManager.localNotesFileReader ReadFilesList];

@@ -22,6 +22,7 @@
 		CD4ACF781BA868CA00EB0289 /* NoteEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4ACF761BA868CA00EB0289 /* NoteEditViewController.xib */; };
 		CD4ACF7C1BA86BE700EB0289 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF7B1BA86BE700EB0289 /* DataManager.m */; };
 		CD4ACF821BA9828C00EB0289 /* dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = CD4ACF811BA9828C00EB0289 /* dropbox.png */; };
+		CD4ACF881BA988D800EB0289 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4ACF871BA988D800EB0289 /* DropboxSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		CD4ACF7A1BA86BE700EB0289 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		CD4ACF7B1BA86BE700EB0289 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		CD4ACF811BA9828C00EB0289 /* dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropbox.png; sourceTree = "<group>"; };
+		CD4ACF871BA988D800EB0289 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD4ACF881BA988D800EB0289 /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +115,7 @@
 				CD4ACF801BA9803C00EB0289 /* View */,
 				CD4ACF7F1BA9802D00EB0289 /* Resources */,
 				CD4ACF4C1BA6F5E000EB0289 /* Images.xcassets */,
+				CD4ACF861BA9888100EB0289 /* Framework */,
 				CD4ACF3F1BA6F5E000EB0289 /* Supporting Files */,
 			);
 			path = DropNotes;
@@ -195,6 +199,14 @@
 				CD4ACF751BA868CA00EB0289 /* NoteEditViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CD4ACF861BA9888100EB0289 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				CD4ACF871BA988D800EB0289 /* DropboxSDK.framework */,
+			);
+			name = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,6 +447,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DropNotes",
+				);
 				INFOPLIST_FILE = DropNotes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -445,6 +461,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DropNotes",
+				);
 				INFOPLIST_FILE = DropNotes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

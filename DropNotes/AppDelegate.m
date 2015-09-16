@@ -10,7 +10,8 @@
 #include "DropNotes-prefix.pch"
 #import "GALOCNavigationController.h"
 #import "DropNotesTableViewController.h"
-@interface AppDelegate ()
+#import <DropboxSDK/DropboxSDK.h>
+@interface AppDelegate () <DBSessionDelegate, DBNetworkRequestDelegate>
 
 @end
 
@@ -23,6 +24,26 @@
     GALOCNavigationController *navController = [[GALOCNavigationController alloc]initWithRootViewController:homeView];
     window.rootViewController = navController;
     [window makeKeyAndVisible];
+    // Set these variables before launching the app
+    NSString* appKey = @"c2bwmygb62f86hf";
+    NSString* appSecret = @"rtwdeahcfi24r74";
+    NSString *root = kDBRootAppFolder;
+    DBSession* session = [[DBSession alloc] initWithAppKey:appKey appSecret:appSecret root:root];
+    session.delegate = self; // DBSessionDelegate methods allow you to handle re-authenticating
+    [DBSession setSharedSession:session];
+    
+    [DBRequest setNetworkRequestDelegate:self];
+    
+    NSURL *launchURL = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+    NSInteger majorVersion =
+    [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] integerValue];
+    if (launchURL && majorVersion < 4) {
+        // Pre-iOS 4.0 won't call application:handleOpenURL; this code is only needed if you support
+        // iOS versions 3.2 or below
+        [self application:application handleOpenURL:launchURL];
+        return NO;
+    }
+
     return YES;
 }
 
@@ -46,6 +67,34 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+#pragma mark -
+#pragma mark DBSessionDelegate methods
+
+- (void)sessionDidReceiveAuthorizationFailure:(DBSession*)session userId:(NSString *)userId {
+    relinkUserId = userId;
+    [[[UIAlertView alloc]
+       initWithTitle:@"Dropbox Session Ended" message:@"Do you want to relink?" delegate:self
+       cancelButtonTitle:@"Cancel" otherButtonTitles:@"Relink", nil]
+     show];
+}
+#pragma mark -
+#pragma mark DBNetworkRequestDelegate methods
+
+static int outstandingRequests;
+
+- (void)networkRequestStarted {
+    outstandingRequests++;
+    if (outstandingRequests == 1) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    }
+}
+
+- (void)networkRequestStopped {
+    outstandingRequests--;
+    if (outstandingRequests == 0) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }
 }
 
 @end
