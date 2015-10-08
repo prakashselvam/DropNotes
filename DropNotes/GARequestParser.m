@@ -25,20 +25,20 @@
 	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60];
 	[theRequest setHTTPMethod: @"POST" ];
 	[theRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
-    [theRequest setValue:[DataManager sharedDataManager].iOSVersion forHTTPHeaderField:@"iosversion"];
+    //[theRequest setValue:[DataManager sharedDataManager].iOSVersion forHTTPHeaderField:@"iosversion"];
     [theRequest setValue:@"IOS" forHTTPHeaderField:@"type"];
-    [theRequest setValue:(NSString *)[DataManager sharedDataManager].appVersion forHTTPHeaderField:@"appversion"];
+    //[theRequest setValue:(NSString *)[DataManager sharedDataManager].appVersion forHTTPHeaderField:@"appversion"];
     if(data && [data length] > 0) {
 		NSData *myRequestData = [ NSData dataWithBytes: [ data UTF8String ] length: strlen([data UTF8String]) ];
 		[theRequest setHTTPBody: myRequestData ];
 	}
     // create the connection with the request and start loading the data
     urlConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    [[AppDelegate sharedAppDelegate] reachabilityChanged:nil];
+    //[[AppDelegate sharedAppDelegate] reachabilityChanged:nil];
     if (urlConnection != nil) {
         do {
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-        } while (!done && [AppDelegate sharedAppDelegate].connected);
+        } while (!done);
         
 		if(JSONparseneeded) {
             xmlData = nil;
@@ -71,11 +71,6 @@
 	NSString *base_url = nil;
 	[[NSURLCache sharedURLCache] removeAllCachedResponses];
 	if ([urlStr rangeOfString:@"http:"].location == NSNotFound && [urlStr rangeOfString:@"https:"].location == NSNotFound) {
-#if PROD
-        base_url = [NSString stringWithFormat:@"%@%@",[[DataManager sharedDataManager].appConfig objectForKey:@"ProductionURL"], urlStr];
-#else
-        base_url = [NSString stringWithFormat:@"%@%@",[[DataManager sharedDataManager].appConfig objectForKey:@"SingleboxURL"], urlStr];
-#endif
 	} else {
 		base_url = urlStr;
 	}
@@ -84,18 +79,11 @@
 	NSLog(@"url - %@",base_url);
 	NSLog(@"data - %@",data);
 #endif
-	if (![[AppDelegate sharedAppDelegate] connected]) {
-		//[[AppDelegate sharedAppDelegate] alertConnectionLost:@"Unable to reach host"];
-		exception = [[NSException alloc] initWithName:@"NOINET" reason:@"NOINET" userInfo:nil];
-		[self postNotification];
-	}
-	else {
 		if (thread) {
 			[thread cancel];
 		}
 		thread = [[NSThread alloc] initWithTarget:self selector:@selector(downloadAndParse:) object:url];
 		[thread start];
-	}
 }
 
 #pragma mark NSURLConnection Delegate methods
@@ -103,47 +91,47 @@
 	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-	NSString *trustedHost = [[NSURL URLWithString:[DataManager sharedDataManager].secureBaseUrl] host];
-	if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-		if ([trustedHost isEqualToString:challenge.protectionSpace.host]) {
-			[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-		}
-	}
-	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-}
-
--(void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        NSURL* baseURL;
-#if PROD
-        baseURL = [NSURL URLWithString:[[DataManager sharedDataManager].appConfig objectForKey:@"ProductionURL"]];
-#else
-        baseURL = [NSURL URLWithString:[[DataManager sharedDataManager].appConfig objectForKey:@"SingleboxURL"]];
-#endif
-        if ([challenge.protectionSpace.host isEqualToString:baseURL.host]) {
-#if DEBUG
-            NSLog(@"trusting connection to host %@", challenge.protectionSpace.host);
-#endif
-            [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-        } else {
-#if DEBUG
-            NSLog(@"Not trusting connection to host %@", challenge.protectionSpace.host);
-#endif
-        }
-    }
-    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-}
-
-- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-	NSString *trustedHost = [[NSURL URLWithString:[DataManager sharedDataManager].secureBaseUrl] host];
-	if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-		if ([trustedHost isEqualToString:challenge.protectionSpace.host]) {
-			[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-		}
-	}
-	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-}
+//- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+//	NSString *trustedHost = [[NSURL URLWithString:[DataManager sharedDataManager].secureBaseUrl] host];
+//	if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+//		if ([trustedHost isEqualToString:challenge.protectionSpace.host]) {
+//			[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+//		}
+//	}
+//	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+//}
+//
+//-(void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+//    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+//        NSURL* baseURL;
+//#if PROD
+//        baseURL = [NSURL URLWithString:[[DataManager sharedDataManager].appConfig objectForKey:@"ProductionURL"]];
+//#else
+//        baseURL = [NSURL URLWithString:[[DataManager sharedDataManager].appConfig objectForKey:@"SingleboxURL"]];
+//#endif
+//        if ([challenge.protectionSpace.host isEqualToString:baseURL.host]) {
+//#if DEBUG
+//            NSLog(@"trusting connection to host %@", challenge.protectionSpace.host);
+//#endif
+//            [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+//        } else {
+//#if DEBUG
+//            NSLog(@"Not trusting connection to host %@", challenge.protectionSpace.host);
+//#endif
+//        }
+//    }
+//    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+//}
+//
+//- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+//	NSString *trustedHost = [[NSURL URLWithString:[DataManager sharedDataManager].secureBaseUrl] host];
+//	if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+//		if ([trustedHost isEqualToString:challenge.protectionSpace.host]) {
+//			[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+//		}
+//	}
+//	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+//}
 
 /*
  Disable caching so that each time we run this app we are starting with a clean slate. You may not want to do this in your application.
@@ -183,12 +171,12 @@
                 dict = [JSON mutableCopy];
             }
             
-            if ([[DataManager sharedDataManager].sessionCheckNotifications containsObject:notification] && JSONparseneeded) {
+            if (JSONparseneeded) {
                 if ([dict objectForKey:@"status"] != nil && [dict objectForKey:@"msg"]!= nil && [[dict objectForKey:@"status"]  isEqual: @"error"] && ([[dict objectForKey:@"msg"]  isEqual: @"Invalid Session."] || [[dict objectForKey:@"msg"]  isEqual: @"Invalid session/required post data not present in the request."])) {
-                    [[AppDelegate sharedAppDelegate] hideProgress];
+                    //[[AppDelegate sharedAppDelegate] hideProgress];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Session Expired" message:@"Please login to continue." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [alert show];
-                    [[AppDelegate sharedAppDelegate] setLoginAsRoot];
+                    //[[AppDelegate sharedAppDelegate] setLoginAsRoot];
                 }
             }
         } else{
