@@ -27,6 +27,7 @@
 		CD4ACF8D1BA9985400EB0289 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4ACF8C1BA9985400EB0289 /* Security.framework */; };
 		CD4ACF8F1BA9985B00EB0289 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4ACF8E1BA9985B00EB0289 /* QuartzCore.framework */; };
 		CD9D3D051BC6DFA000803F64 /* Appsee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9D3D041BC6DFA000803F64 /* Appsee.framework */; settings = {ASSET_TAGS = (); }; };
+		CD9D3D081BC6E14900803F64 /* GARequestParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9D3D071BC6E14900803F64 /* GARequestParser.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		CD4ACF8C1BA9985400EB0289 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CD4ACF8E1BA9985B00EB0289 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CD9D3D041BC6DFA000803F64 /* Appsee.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Appsee.framework; sourceTree = "<group>"; };
+		CD9D3D061BC6E14900803F64 /* GARequestParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GARequestParser.h; sourceTree = "<group>"; };
+		CD9D3D071BC6E14900803F64 /* GARequestParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GARequestParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,8 @@
 		CD4ACF3E1BA6F5E000EB0289 /* DropNotes */ = {
 			isa = PBXGroup;
 			children = (
+				CD9D3D061BC6E14900803F64 /* GARequestParser.h */,
+				CD9D3D071BC6E14900803F64 /* GARequestParser.m */,
 				CD4ACF431BA6F5E000EB0289 /* AppDelegate.h */,
 				CD4ACF441BA6F5E000EB0289 /* AppDelegate.m */,
 				CD4ACF851BA985F300EB0289 /* ViewControllers */,
@@ -335,6 +340,7 @@
 				CD4ACF451BA6F5E000EB0289 /* AppDelegate.m in Sources */,
 				CD4ACF731BA84F0400EB0289 /* LocalNotesFileReader.m in Sources */,
 				CD4ACF771BA868CA00EB0289 /* NoteEditViewController.m in Sources */,
+				CD9D3D081BC6E14900803F64 /* GARequestParser.m in Sources */,
 				CD4ACF7C1BA86BE700EB0289 /* DataManager.m in Sources */,
 				CD4ACF421BA6F5E000EB0289 /* main.m in Sources */,
 				CD4ACF8B1BA9942B00EB0289 /* DropBoxFileSync.m in Sources */,
