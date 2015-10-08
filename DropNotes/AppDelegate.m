@@ -12,6 +12,7 @@
 #import "DropNotesTableViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "DataManager.h"
+#import <Appsee/Appsee.h>
 @interface AppDelegate () <DBSessionDelegate, DBNetworkRequestDelegate>
 @property DropNotesTableViewController *homeView;
 @end
@@ -25,6 +26,8 @@
     GALOCNavigationController *navController = [[GALOCNavigationController alloc]initWithRootViewController:homeView];
     window.rootViewController = navController;
     [window makeKeyAndVisible];
+    [Appsee start:@"your key"];
+    [Appsee setUserID:@"customer identifier"];
     // Set these variables before launching the app
     NSString* appKey = @"c2bwmygb62f86hf";
     NSString* appSecret = @"rtwdeahcfi24r74";
