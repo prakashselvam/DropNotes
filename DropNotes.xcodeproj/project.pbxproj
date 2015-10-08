@@ -26,6 +26,7 @@
 		CD4ACF8B1BA9942B00EB0289 /* DropBoxFileSync.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4ACF8A1BA9942B00EB0289 /* DropBoxFileSync.m */; };
 		CD4ACF8D1BA9985400EB0289 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4ACF8C1BA9985400EB0289 /* Security.framework */; };
 		CD4ACF8F1BA9985B00EB0289 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4ACF8E1BA9985B00EB0289 /* QuartzCore.framework */; };
+		CD9D3D051BC6DFA000803F64 /* Appsee.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9D3D041BC6DFA000803F64 /* Appsee.framework */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		CD4ACF8A1BA9942B00EB0289 /* DropBoxFileSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropBoxFileSync.m; sourceTree = "<group>"; };
 		CD4ACF8C1BA9985400EB0289 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CD4ACF8E1BA9985B00EB0289 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CD9D3D041BC6DFA000803F64 /* Appsee.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Appsee.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			files = (
 				CD4ACF8F1BA9985B00EB0289 /* QuartzCore.framework in Frameworks */,
 				CD4ACF8D1BA9985400EB0289 /* Security.framework in Frameworks */,
+				CD9D3D051BC6DFA000803F64 /* Appsee.framework in Frameworks */,
 				CD4ACF881BA988D800EB0289 /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,6 +220,7 @@
 		CD4ACF861BA9888100EB0289 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				CD9D3D041BC6DFA000803F64 /* Appsee.framework */,
 				CD4ACF871BA988D800EB0289 /* DropboxSDK.framework */,
 			);
 			name = Framework;
